@@ -37,22 +37,6 @@ class SpellCheckerTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testFixInternalErrorException()
-    {
-        Log::shouldReceive('error')->withSomeOfArgs('YANDEX SPELLER SERVICE FAILED');
-
-        $mock = new MockHandler([
-            new Response(500),
-        ]);
-        $handlerStack = HandlerStack::create($mock);
-        $client = new Client(['handler' => $handlerStack]);
-        $spellChecker = new SpellChecker($client);
-        $message = 'мама мыла рому';
-        $this->assertSame($message, $spellChecker->fix($message));
-
-        Log::partialMock()->shouldHaveReceived('error');
-    }
-
     public function getCorrectionInfoInvalidResponsesDataProvider(): array
     {
         return [
@@ -70,7 +54,7 @@ class SpellCheckerTest extends TestCase
      * @param Response $response
      * @throws ReflectionException
      */
-    public function testGetCorrectionInfoInvalidResponsesDataProvider(Response $response)
+    public function testGetCorrectionInfoInvalidResponses(Response $response)
     {
         Log::shouldReceive('error')->withSomeOfArgs('YANDEX SPELLER SERVICE FAILED');
 
