@@ -1,0 +1,20 @@
+{
+    "scripts": {
+        "test": "phpunit",
+        "coverage": "phpunit --coverage-text"
+    },
+    "require": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "^6.5",
+        "illuminate/log": "^6.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Twin\\Support\\Yandex\\": "src"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5",
+        "mockery/mockery": "^1.3"
+    }
+}
